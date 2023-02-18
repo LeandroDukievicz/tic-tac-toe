@@ -6,29 +6,28 @@ let messageContainer = document.querySelector("#message");
 let messageText = document.querySelector("#message p");
 let secondPlayer;
 
-// contador de jogadas
+
 let player1 = 0;
 let player2 = 0;
 
-// adicionando o evento de click a todos as caixas
+
 for(let i = 0; i < boxes.length; i++) {
 
-  // quando há o click na caixa
   boxes[i].addEventListener("click", function() {
 
     let el = checkEl(player1, player2);
     
-    // verificando se ja tem um elemento
+    
     if(this.childNodes.length == 0) {
       let cloneEl = el.cloneNode(true);
 
       this.appendChild(cloneEl);
 
-      // computa a jogada
+    
       if(player1 == player2) {
         player1++;
 
-        // jogada ia
+    
         if(secondPlayer == 'ai-player') {
 
           computerPlay();
@@ -48,7 +47,7 @@ for(let i = 0; i < boxes.length; i++) {
 
 }
 
-// ve quem está jogando
+
 function checkEl(player1, player2) {
 
   if(player1 == player2) {
@@ -60,7 +59,7 @@ function checkEl(player1, player2) {
   return el;
 }
 
-// checa quem venceu e quem perdeu após cada jogada
+
 function checkWinCondition() {
 
   let b1 = document.getElementById('block-1');
@@ -73,7 +72,7 @@ function checkWinCondition() {
   let b8 = document.getElementById('block-8');
   let b9 = document.getElementById('block-9');
 
-  // horizontal
+
   if(b1.childNodes.length > 0 && b2.childNodes.length > 0 && b3.childNodes.length > 0) {
 
     let b1Child = b1.childNodes[0].className;
@@ -116,7 +115,7 @@ function checkWinCondition() {
     
   }
 
-  // Vertical
+
   if(b1.childNodes.length > 0 && b4.childNodes.length > 0 && b7.childNodes.length > 0) {
 
     let b1Child = b1.childNodes[0].className;
@@ -159,7 +158,7 @@ function checkWinCondition() {
     
   }
 
-  // Diagonal
+
 
   if(b1.childNodes.length > 0 && b5.childNodes.length > 0 && b9.childNodes.length > 0) {
 
@@ -190,7 +189,7 @@ function checkWinCondition() {
   }
 
 
-  // deu velha
+
   let counter = 0;
 
   for(let i = 0; i < boxes.length; i++) {
@@ -207,7 +206,7 @@ function checkWinCondition() {
 
 }
 
-// limpa o jogo e atualiza placar
+
 function declareWinner(winner) {
 
   let scoreboardX = document.querySelector("#scoreboard-1");
@@ -224,20 +223,20 @@ function declareWinner(winner) {
     msg = "Deu velha!";
   }
 
-  // exibe mensagem
+
   messageText.innerHTML = msg;
   messageContainer.classList.remove("hide");
 
-  // esconde mensagem
+
   setTimeout(function() {
     messageContainer.classList.add("hide");
   }, 3000);
 
-  // zera as jogadas
+
   player1 = 0;
   player2 = 0;
 
-  // remove os x e o
+
   let boxesToRemove = document.querySelectorAll(".box div");
   
   for(let i = 0; i < boxesToRemove.length; i++) {
@@ -247,7 +246,7 @@ function declareWinner(winner) {
 
 }
 
-// evento para ver se é contra IA ou segundo player
+
 for(let i = 0; i < buttons.length; i++) {
 
   buttons[i].addEventListener("click", function() {
@@ -267,7 +266,7 @@ for(let i = 0; i < buttons.length; i++) {
 
 }
 
-// jogada IA 
+
 function computerPlay() {
 
   let cloneO = o.cloneNode(true);
@@ -278,14 +277,14 @@ function computerPlay() {
 
     let randomNumber = Math.floor(Math.random() * 5);
 
-    // só se não tiver marcado anteriormente
+
     if(boxes[i].childNodes[0] == undefined) {  
       if(randomNumber <= 1) {
         boxes[i].appendChild(cloneO);
         counter++;
         break;
       }
-    // checar quantas estão preenchidas        
+    
     } else {
       filled++;
     }
